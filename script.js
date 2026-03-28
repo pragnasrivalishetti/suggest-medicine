@@ -1,63 +1,63 @@
-let selected = [];
+let ageGroup = "";
+let selectedSymptoms = [];
 
-// Select symptom
-function selectSymptom(btn) {
-    let symptom = btn.innerText;
+function selectAge(age) {
+    ageGroup = age;
+    document.getElementById("ageSection").classList.add("hidden");
+    document.getElementById("symptomSection").classList.remove("hidden");
+}
 
-    if (selected.includes(symptom)) {
-        selected = selected.filter(s => s !== symptom);
-        btn.classList.remove("active");
+function toggleSymptom(btn, symptom) {
+    btn.classList.toggle("active");
+
+    if (selectedSymptoms.includes(symptom)) {
+        selectedSymptoms = selectedSymptoms.filter(s => s !== symptom);
     } else {
-        selected.push(symptom);
-        btn.classList.add("active");
+        selectedSymptoms.push(symptom);
     }
 }
 
-// Search filter
-document.getElementById("search").addEventListener("keyup", function() {
-    let value = this.value.toLowerCase();
-    let buttons = document.querySelectorAll(".buttons button");
+function checkResult() {
+    let input = document.getElementById("searchSymptom").value.toLowerCase();
+    if (input) selectedSymptoms.push(input);
 
-    buttons.forEach(btn => {
-        if (btn.innerText.toLowerCase().includes(value)) {
-            btn.style.display = "inline-block";
-        } else {
-            btn.style.display = "none";
-        }
-    });
-});
+    let disease = "";
+    let medicines = [];
+    let note = "";
 
-// Disease logic
-function checkDisease() {
-    let output = document.getElementById("output");
-
-    if (selected.length === 0) {
-        output.innerHTML = "⚠️ Please select symptoms!";
-        return;
-    }
-
-    if (selected.includes("Fever") && selected.includes("Cough")) {
-        output.innerHTML = `
-        <h3>Possible Disease: Flu</h3>
-        <p>💊 Medicines: Paracetamol, Rest</p>
-        <p>⚠️ Consult doctor if severe</p>`;
-    }
-    else if (selected.includes("Cold") && selected.includes("Allergy")) {
-        output.innerHTML = `
-        <h3>Possible Disease: Allergy</h3>
-        <p>💊 Medicines: Cetirizine</p>
-        <p>⚠️ Avoid dust & allergens</p>`;
-    }
-    else if (selected.includes("Headache")) {
-        output.innerHTML = `
-        <h3>Possible Issue: Migraine / Stress</h3>
-        <p>💊 Medicines: Paracetamol</p>
-        <p>⚠️ Take rest</p>`;
-    }
+    if (selectedSymptoms.includes("fever") && selectedSymptoms.includes("cold")) {
+        disease = "Flu";
+        medicines = ["Paracetamol", "Dolo 650", "Cetirizine"];
+    } 
+    else if (selectedSymptoms.includes("cough")) {
+        disease = "Cough Infection";
+        medicines = ["Benadryl", "Ascoril", "Vicks Syrup"];
+    } 
+    else if (selectedSymptoms.includes("headache")) {
+        disease = "Headache";
+        medicines = ["Crocin", "Ibuprofen", "Disprin"];
+    } 
     else {
-        output.innerHTML = `
-        <h3>General Condition</h3>
-        <p>💊 Basic care recommended</p>
-        <p>⚠️ Consult doctor</p>`;
+        disease = "General Weakness";
+        medicines = ["ORS", "Vitamin C", "Multivitamins"];
     }
+
+    if (ageGroup === "elder" && selectedSymptoms.includes("fever")) {
+        note = "⚠️ Consult a doctor immediately.";
+    }
+
+    document.getElementById("disease").innerText = "Disease: " + disease;
+
+    let list = document.getElementById("medicines");
+    list.innerHTML = "";
+    medicines.forEach(m => {
+        let li = document.createElement("li");
+        li.innerText = m;
+        list.appendChild(li);
+    });
+
+    document.getElementById("note").innerText = note;
+
+    document.getElementById("symptomSection").classList.add("hidden");
+    document.getElementById("resultSection").classList.remove("hidden");
 }
