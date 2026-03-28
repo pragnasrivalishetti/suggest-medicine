@@ -15,19 +15,17 @@
         <h1>Health Assistant</h1>
     </div>
 
-    <!-- Age Selection -->
+    <!-- Age Section -->
     <div class="section" id="ageSection">
-        <h2>Select Age</h2>
-        <div class="buttons">
-            <button onclick="selectAge('child')">Child (0-12)</button>
-            <button onclick="selectAge('adult')">Adult (13-59)</button>
-            <button onclick="selectAge('elder')">Elder (60+)</button>
-        </div>
+        <h2>Select Age Group</h2>
+        <button onclick="selectAge('child')">Child (0-12)</button>
+        <button onclick="selectAge('adult')">Adult (13-59)</button>
+        <button onclick="selectAge('elder')">Elder (60+)</button>
     </div>
 
-    <!-- Symptoms -->
+    <!-- Symptoms Section -->
     <div class="section hidden" id="symptomSection">
-        <h2>Choose Symptoms</h2>
+        <h2>Select Symptoms</h2>
 
         <div class="buttons">
             <button onclick="toggleSymptom(this,'fever')">Fever</button>
@@ -42,12 +40,21 @@
         <button class="check-btn" onclick="checkResult()">Check Result</button>
     </div>
 
-    <!-- Result -->
+    <!-- Result Section -->
     <div class="section hidden" id="resultSection">
-        <h2>Diagnosis</h2>
+
+        <h2>🩺 Diagnosis Result</h2>
+
+        <h3>Disease</h3>
         <p id="disease"></p>
+
+        <h3>Recommended Medicines</h3>
         <ul id="medicines"></ul>
+
+        <h3>Note</h3>
         <p id="note"></p>
+
+        <button class="exit-btn" onclick="restartApp()">Exit / Restart</button>
     </div>
 
 </div>
