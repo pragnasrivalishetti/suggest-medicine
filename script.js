@@ -43,10 +43,12 @@ function checkResult() {
     }
 
     if (ageGroup === "elder" && selectedSymptoms.includes("fever")) {
-        note = "⚠️ Consult a doctor immediately.";
+        note = "⚠️ High risk detected. Please consult a doctor.";
+    } else {
+        note = "Take rest and stay hydrated.";
     }
 
-    document.getElementById("disease").innerText = "Disease: " + disease;
+    document.getElementById("disease").innerText = disease;
 
     let list = document.getElementById("medicines");
     list.innerHTML = "";
@@ -60,4 +62,18 @@ function checkResult() {
 
     document.getElementById("symptomSection").classList.add("hidden");
     document.getElementById("resultSection").classList.remove("hidden");
+}
+
+function restartApp() {
+    ageGroup = "";
+    selectedSymptoms = [];
+
+    document.getElementById("searchSymptom").value = "";
+
+    document.querySelectorAll(".buttons button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    document.getElementById("resultSection").classList.add("hidden");
+    document.getElementById("ageSection").classList.remove("hidden");
 }
