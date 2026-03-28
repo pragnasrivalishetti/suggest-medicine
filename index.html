@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Symptom Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🩺 AI Symptom Checker</h1>
+
+    <!-- Search Bar -->
+    <input type="text" id="search" placeholder="Search symptoms...">
+
+    <!-- Symptom Buttons -->
+    <div class="buttons">
+        <button onclick="selectSymptom(this)">Fever</button>
+        <button onclick="selectSymptom(this)">Headache</button>
+        <button onclick="selectSymptom(this)">Cough</button>
+        <button onclick="selectSymptom(this)">Cold</button>
+        <button onclick="selectSymptom(this)">Body Pain</button>
+        <button onclick="selectSymptom(this)">Allergy</button>
+    </div>
+
+    <!-- Check Button -->
+    <br>
+    <button class="check-btn" onclick="checkDisease()">Check Result</button>
+
+    <!-- Output -->
+    <div class="result" id="output"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
